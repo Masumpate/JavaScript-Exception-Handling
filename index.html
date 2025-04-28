@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Exception Handling</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #cfabab;
+        }
+
+        h2 {
+            color: #5c4343;
+        }
+
+        .result {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>1. Handle Exception Caused by Printing Undeclared Variable</h2>
+    <button onclick="handleUndeclaredVariable()">Try to Print Undeclared Variable</button>
+    <div id="result1" class="result"></div>
+
+    <hr>
+
+    <h2>2. Throw "Divide by Zero" Error</h2>
+    <button onclick="divideByZero()">Try to Divide by Zero</button>
+    <div id="result2" class="result"></div>
+
+    <hr>
+
+    <h2>3. Throw "Out of Bound" Error</h2>
+    <button onclick="outOfBoundError()">Try to Access Out of Bound Array Index</button>
+    <div id="result3" class="result"></div>
+
+    <hr>
+
+    <h2>4. Exception Handling with Finally Statement</h2>
+    <button onclick="testFinally()">Test Finally Block</button>
+    <div id="result4" class="result"></div>
+
+    <script>
+        // 1. Handle Exception Caused by Printing Undeclared Variable
+        function handleUndeclaredVariable() {
+            try {
+                // Trying to print an undeclared variable
+                console.log(x); // x is not declared
+            } catch (error) {
+                document.getElementById("result1").innerHTML = "<span class='error'>Error: " + error.message + "</span>";
+            }
+        }
+
+        // 2. Throw "Divide by Zero" Error
+        function divideByZero() {
+            try {
+                let num = 10;
+                let denom = 0;
+                if (denom === 0) {
+                    throw new Error("Divide by Zero error");
+                }
+                let result = num / denom;
+            } catch (error) {
+                document.getElementById("result2").innerHTML = "<span class='error'>Error: " + error.message + "</span>";
+            }
+        }
+
+        // 3. Throw "Out of Bound" Error
+        function outOfBoundError() {
+            try {
+                let arr = [1, 2, 3];
+                let index = 5;
+                if (index < 0 || index >= arr.length) {
+                    throw new Error("Out of Bound Error: Index is out of range");
+                }
+                let element = arr[index]; // This will cause an "Out of Bound" error
+            } catch (error) {
+                document.getElementById("result3").innerHTML = "<span class='error'>Error: " + error.message + "</span>";
+            }
+        }
+
+        // 4. Exception Handling Using Finally Statement
+        function testFinally() {
+            try {
+                // This code will execute successfully
+                document.getElementById("result4").innerHTML = "Inside try block";
+            } catch (error) {
+                document.getElementById("result4").innerHTML = "Error: " + error.message;
+            } finally {
+                // This block will always execute
+                document.getElementById("result4").innerHTML += "<br>Finally block is always executed.";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
